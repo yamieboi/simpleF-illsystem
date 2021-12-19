@@ -2,6 +2,21 @@ local QBCore = exports['qb-core']:GetCoreObject()
 local infected = {}
 local chance_to_get_infected = 50
 local chance_to_get_corona,chance_to_get_fever,chance_to_get_cancer = 25,30,15 
+
+
+function corona_effected()
+    
+end
+
+
+function fever_effected()
+    
+end
+
+
+function cancer_effected()
+    
+end
 CreateThread(function ()
     while true do
         Wait(1000)
@@ -21,3 +36,5 @@ CreateThread(function ()
     end
     
 end)
+
+
