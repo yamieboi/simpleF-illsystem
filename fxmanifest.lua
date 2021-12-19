@@ -7,3 +7,7 @@ author 'simpleF Development Yamie'
 client_scripts {
 	"client_illsystem_simplef.lua"
 }
+
+server_scripts {
+	"server.lua"
+}
