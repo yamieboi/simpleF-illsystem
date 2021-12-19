@@ -12,20 +12,20 @@ local function corona_effected()
     CreateThread(function ()
         while effected_corona do
             RequestAnimDict('timetable@gardener@smoking_joint')
-            Wait(5000)
+            Wait(25000)
             local player = PlayerPedId()
-            print('effected by corona')
             local chance =  math.random(1,100)
             if chance <= 49 then
                 TaskPlayAnim(player, "timetable@gardener@smoking_joint", "idle_cough", 8.0, 8.0, -1, 50, 0, false, false, false)
-            elseif chance >= 50 and chance <= 65 then
+                Citizen.Wait(2000)
+                ClearPedTasks(player)
+
+            elseif chance >= 50 and chance <= 60 then
                 TaskPlayAnim(player, "timetable@gardener@smoking_joint", "idle_cough", 8.0, 8.0, -1, 50, 0, false, false, false)
-                Citizen.Wait(1700)
+                Citizen.Wait(2200)
 				TriggerServerEvent('sneezeSync')
+                ClearPedTasks(player)
             else
-                GetEntityHealth(
-                    entity --[[ Entity ]]
-                )
                 if math.random(1,100) < 50 then
                     QBCore.Functions.Notify("Feeling really sick!", "error")
                     SetEntityHealth(player,GetEntityHealth(player) - 1)
@@ -41,7 +41,7 @@ local function corona_effected()
 
                 end
 
-                Wait(5000)
+                Wait(25000)
             end
 
         end
@@ -50,8 +50,8 @@ end
 
 
 
-RegisterNetEvent('sneeze')
-AddEventHandler('sneeze', function(playerId)
+
+RegisterNetEvent('sneeze', function(playerId)
 	local playerPed = GetPlayerPed(GetPlayerFromServerId(playerId))
 	local particleDictionary = "cut_bigscr"
 	local particleName = "cs_bigscr_beer_spray"
