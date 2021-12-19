@@ -8,6 +8,7 @@ local function corona_effected()
     if not effected_corona then
         effected_corona = true
         SetPedMotionBlur(PlayerPedId(), true)
+   
     end
     CreateThread(function ()
         while effected_corona do
@@ -30,13 +31,13 @@ local function corona_effected()
                     QBCore.Functions.Notify("Feeling really sick!", "error")
                     SetEntityHealth(player,GetEntityHealth(player) - 1)
                     ShakeGameplayCam("FAMILY5_DRUG_TRIP_SHAKE", 0.1)
-                    Wait(25000)
+                    Wait(5000)
                     ShakeGameplayCam("FAMILY5_DRUG_TRIP_SHAKE", 0.0)
                 else
                     QBCore.Functions.Notify("You have a bad fever!", "error")
                     SetEntityHealth(player,GetEntityHealth(player) - 2)
                     ShakeGameplayCam("FAMILY5_DRUG_TRIP_SHAKE", 0.1)
-                    Wait(25000)
+                    Wait(5000)
                     ShakeGameplayCam("FAMILY5_DRUG_TRIP_SHAKE", 0.0)
 
                 end
@@ -47,6 +48,8 @@ local function corona_effected()
         end
     end)
 end
+
+
 
 
 
@@ -101,7 +104,7 @@ CreateThread(function ()
         Wait(1000)
         if math.random(1,100) <= chance_to_get_infected and not effected_fever and not effected_cancer and not effected_corona then
             local get_disease_chance = math.random(1,100)
-            if get_disease_chance <= chance_to_get_corona--[[  and  get_disease_chance > chance_to_get_cancer and not effected_fever ]] then
+            if get_disease_chance <= chance_to_get_corona and  get_disease_chance > chance_to_get_cancer and not effected_fever then
                 print("corona")
                 corona_effected()
             elseif get_disease_chance <= chance_to_get_cancer and not effected_cancer then
