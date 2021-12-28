@@ -1,8 +1,7 @@
 local QBCore = exports['qb-core']:GetCoreObject()
-local infected = {}
-local chance_to_get_infected = 50
-local chance_to_get_corona,chance_to_get_fever,chance_to_get_cancer = 100,30,15 
-local effected_fever,effected_cancer,effected_corona = false,false,false
+local infected = false
+
+local effected_cancer,effected_corona = false,false
 
 local function corona_effected()
     if not effected_corona then
@@ -74,17 +73,7 @@ RegisterNetEvent('sneeze', function(playerId)
 
 end)
 
-local function fever_effected()
-    if not effected_fever then
-        effected_fever = true
-    end
-    CreateThread(function ()
-        while effected_fever do
-            Wait(5000)
-            print('effected by fever')
-        end
-    end)
-end
+
 
 
 local function cancer_effected()
@@ -102,25 +91,22 @@ end
 CreateThread(function ()
     while true do
         Wait(1000)
-        if math.random(1,100) <= chance_to_get_infected and not effected_fever and not effected_cancer and not effected_corona then
-            local get_disease_chance = math.random(1,100)
-            if get_disease_chance <= chance_to_get_corona and  get_disease_chance > chance_to_get_cancer and not effected_fever then
+        if not infected then
+        if math.random(1,100) <= 50 then
+           local chance = math.random(1,100) 
+            if chance <= 50 then
+                infected = true
                 print("corona")
                 corona_effected()
-            elseif get_disease_chance <= chance_to_get_cancer and not effected_cancer then
+            elseif chance >= 85 then
+                infected = true
                 print("cancer")
                 cancer_effected()
-            elseif get_disease_chance <= chance_to_get_fever and  get_disease_chance > chance_to_get_corona and not  effected_corona then
-                print("fever")
-                fever_effected()
-            else
-                if not effected_fever then
-                    print("fever")
-                    fever_effected()
-                end
+
 
             end
             
+        end
         end
     end
     
